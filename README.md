@@ -20,5 +20,5 @@ To make your map or cache server use the XSLT style sheets, you will have to mak
     
 with the request. You can find a patch for geowebcache in our repositories here:
 
-* https://github.com/kartverket/geowebcache (3f512c00cf6057a0bb1a591e0ae3c1215e0bfe52 and 4ac70cfdd04f6065ed72412f3be45b918a5d8c6a)
+* https://github.com/kartverket/geowebcache (https://github.com/kartverket/geowebcache/commits?author=relet)
 
