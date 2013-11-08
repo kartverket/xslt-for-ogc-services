@@ -6,7 +6,7 @@ XSLT style sheets to convert OGC service responses (like GetCapabilities) into a
 Demo: [WMTS](http://opencache.statkart.no/gatekeeper/gk/gk.open_wmts?Version=1.0.0&service=wmts&request=getcapabilities) [WMS](http://opencache.statkart.no/gatekeeper/gk/gk.open?Version=1.0.0&service=wms&request=getcapabilities)
 
 Currently, the following style sheets are available:
-* WMS 1.1.1
+* WMS 1.1.1 (1.0.0 compatible)
 * WMS 1.3.0
 * WMTS 
 
