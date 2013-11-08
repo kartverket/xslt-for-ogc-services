@@ -3,7 +3,7 @@ xslt-for-ogc-services
 
 XSLT style sheets to convert OGC service responses (like GetCapabilities) into a human readable format
 
-Demo: [WMTS](opencache.statkart.no/gatekeeper/gk/gk.open_wmts?Version=1.0.0&service=wmts&request=getcapabilities) [WMS](http://opencache.statkart.no/gatekeeper/gk/gk.open?Version=1.0.0&service=wms&request=getcapabilities)
+Demo: [WMTS](http://opencache.statkart.no/gatekeeper/gk/gk.open_wmts?Version=1.0.0&service=wmts&request=getcapabilities) [WMS](http://opencache.statkart.no/gatekeeper/gk/gk.open?Version=1.0.0&service=wms&request=getcapabilities)
 
 Currently, the following style sheets are available:
 * WMS 1.1.1
