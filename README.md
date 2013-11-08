@@ -20,7 +20,7 @@ To make your map or cache server use the XSLT style sheets, you will have to mak
 
     <?xml-stylesheet type="text/xsl" href="/xslt/WMTSGetCapabilities.xsl" ?>
     
-with the request. You can find a patch for geowebcache in our repositories here:
+with the response. You can find a patch for geowebcache in our repositories here:
 
 * https://github.com/kartverket/geowebcache (https://github.com/kartverket/geowebcache/commits?author=relet)
 
