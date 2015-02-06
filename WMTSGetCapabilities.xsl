@@ -32,11 +32,35 @@
    <html>
    <head>
      <title><xsl:value-of select="ows:ServiceIdentification/ows:Title"/> [GetCapabilities]</title>
+     <link rel="stylesheet" type="text/css" href="/xslt/kartverket.css"/>
+     <link rel="stylesheet" type="text/css" href="/xslt/galleria.skv.css"/>
    </head>
    <body>
+
+   <div class="page-header">
+    <div class="navbar">
+     <div class="content-wrapper">
+       <h1 class="site-logo">
+         <span>Kartverket</span></h1>
+
+         <ul class="nav">
+            <li><a href="http://kartverket.no/Om-Kartverket/"><span>
+                Om Kartverket</span></a> </li>
+         </ul>
+     </div>
+    </div>
+   </div>
+
+   <div class="page-main-content startpage">
+   <div class="content-wrapper" id="page-content">
+
      <div>
          <table>
-           <tr><td><b>Service:</b></td><td><b><xsl:value-of select="ows:ServiceIdentification/ows:Title"/></b></td></tr>
+           <div class="header lined">
+             <h2 class="h">Service: <xsl:value-of select="ows:ServiceIdentification/ows:Title"/><b style="left: 113px;"></b></h2>
+           </div>
+ 
+          <tr><td colspan="2"><b><xsl:value-of select="ows:ServiceIdentification/ows:Abstract"/></b></td></tr>
            <tr><td>Type:</td><td><xsl:value-of select="ows:ServiceIdentification/ows:ServiceType"/>&#160;<xsl:value-of select="ows:ServiceIdentification/ows:ServiceTypeVersion"/>
            </td></tr>
            <tr><td>Provider:</td><td>
@@ -76,6 +100,8 @@
      </xsl:for-each>
      <div><h2>Layers</h2></div>
      <xsl:apply-templates select="wmts:Contents/wmts:Layer"/>
+   </div>
+   </div>
    </body>
    </html>
 </xsl:template>
@@ -96,8 +122,8 @@
     http://labs.kartverket.no/norgeskart/wmts.html?id=<xsl:value-of select="ows:Title"/>&amp;url=<xsl:value-of select="$url"/>&amp;name=<xsl:value-of select="ows:Title"/>&amp;layer=<xsl:value-of select="ows:Identifier"/><xsl:if test="not(wmts:TileMatrixSetLink[wmts:TileMatrixSet='EPSG:32633'])">&amp;proj=<xsl:value-of select="substring(wmts:TileMatrixSetLink/wmts:TileMatrixSet,6)"/></xsl:if>#<xsl:call-template name="selectScale"/>/189721/6833548/wlh
   </xsl:variable>
 
-  <div style="border:1px solid green;">
-  <div style="background-color:#dfd; padding:5px"><b>
+  <div style="border:1px solid #c1c1c1;">
+  <div style="background-color:#ededed; padding:5px"><b>
   <xsl:value-of select="ows:Title"/></b> - 
          <xsl:element name="a">
            <xsl:attribute name="href"><xsl:value-of select="$client"/></xsl:attribute>
@@ -120,9 +146,7 @@
          in the following projections:<br/> 
          <xsl:for-each select="wmts:TileMatrixSetLink/wmts:TileMatrixSet">
            <xsl:element name="a">
-             <xsl:attribute name="href">
-               http://spatialreference.org/ref/?search=<xsl:value-of select="."/>
-             </xsl:attribute>
+             <xsl:attribute name="href">http://epsg.io/<xsl:value-of select="substring(.,6)"/></xsl:attribute>
              <xsl:value-of select="."/>
            </xsl:element>;
          </xsl:for-each>
