@@ -34,12 +34,36 @@
    <html>
    <head>
      <title><xsl:value-of select="Service/Title"/> [GetCapabilities]</title>
+     <link rel="stylesheet" type="text/css" href="/xslt/kartverket.css"/>
+     <link rel="stylesheet" type="text/css" href="/xslt/galleria.skv.css"/>
    </head>
    <body>
-     <xsl:for-each select="Service">
+
+   <div class="page-header">
+    <div class="navbar">
+     <div class="content-wrapper">
+       <h1 class="site-logo">
+         <span>Kartverket</span></h1>
+
+         <ul class="nav">
+            <li><a href="http://kartverket.no/Om-Kartverket/"><span>
+                Om Kartverket</span></a> </li>
+         </ul>
+     </div>
+    </div>
+   </div>
+
+   <div class="page-main-content startpage">
+   <div class="content-wrapper" id="page-content">
+
+   <xsl:for-each select="Service">
        <div>
          <table>
-           <tr><td><b>Service:</b></td><td><b><xsl:value-of select="Title"/></b></td></tr>
+           <div class="header lined">
+             <h2 class="h">Service: <xsl:value-of select="Title"/><b style="left: 113px;"></b></h2>
+           </div>
+
+           <tr><td colspan="2"><b><xsl:value-of select="Abstract"/></b></td></tr>
            <tr><td>Type:</td><td><xsl:value-of select="Name"/>&#160;<xsl:value-of select="//WMT_MS_Capabilities/@version"/>
              <xsl:if test="MaxWidth">
                (max. display size: <xsl:value-of select="MaxWidth"/>x<xsl:value-of select="MaxHeight"/>)
@@ -47,11 +71,10 @@
            </td></tr>
            <tr><td>Base URL:</td><td>
              <xsl:element name="a">
-               <xsl:attribute name="href"><xsl:value-of select="OnlineResource/@*[local-name()='href']"/></xsl:attribute>
-               <xsl:value-of select="OnlineResource/@*[local-name()='href']"/>
+               <xsl:attribute name="href"><xsl:value-of select="substring-before(OnlineResource/@*[local-name()='href'],'?')"/></xsl:attribute>
+               <xsl:value-of select="substring-before(OnlineResource/@*[local-name()='href'],'?')"/>
              </xsl:element>
            </td></tr>
-           <tr><td colspan="2"><xsl:value-of select="Abstract"/></td></tr>
            <tr><td colspan="2"><hr/></td></tr>
            <tr><td>Contact:</td><td><xsl:apply-templates select="ContactInformation"/></td></tr>
            <tr><td>Access:</td><td><xsl:value-of select="AccessConstraints"/></td></tr>
@@ -87,6 +110,8 @@
        <div><h2>Layers</h2></div>
        <xsl:apply-templates select="Layer"/>
      </xsl:for-each>
+   </div>
+   </div>
    </body>
    </html>
 </xsl:template>
@@ -123,7 +148,7 @@
   </xsl:variable>
 
   <xsl:choose>
-     <xsl:when test="not(@queryable='0')"> 
+     <xsl:when test="not(@queryable='0') and Name"> 
        <div style="border:1px solid green;">
        <div style="background-color:#dfd; padding:5px"><b>
          <xsl:value-of select="Title"/></b> - 
@@ -180,9 +205,7 @@
          in the following projections:<br/> 
          <xsl:for-each select="SRS">
            <xsl:element name="a">
-             <xsl:attribute name="href">
-               http://spatialreference.org/ref/epsg/<xsl:value-of select="substring(.,6)"/>/
-             </xsl:attribute>
+             <xsl:attribute name="href">http://epsg.io/<xsl:value-of select="substring(.,6)"/></xsl:attribute>
              <xsl:value-of select="."/>
            </xsl:element>;
          </xsl:for-each>
@@ -195,7 +218,7 @@
        <div><xsl:value-of select="Abstract"/></div>
      </xsl:otherwise>
    </xsl:choose>
-   <table style="padding-left:20px"><tr><td>
+   <table style="margin-left:20px"><tr><td>
      <xsl:apply-templates select="Layer"/>
    </td></tr></table>
 </xsl:template>
