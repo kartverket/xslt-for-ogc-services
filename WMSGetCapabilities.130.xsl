@@ -145,8 +145,8 @@
 
   <xsl:choose>
      <xsl:when test="not(@queryable='0')"> 
-       <div style="border:1px solid green;">
-       <div style="background-color:#dfd; padding:5px"><b>
+       <div style="border:solid 1px #c1c1c1; background-color:#fff">
+       <div style="background-color:#ededed; padding:5px"><b>
          <xsl:value-of select="wms:Title"/></b> - 
          <xsl:element name="a">
            <xsl:attribute name="href"><xsl:value-of select="$client"/></xsl:attribute>
