@@ -34,12 +34,35 @@
    <html>
    <head>
      <title><xsl:value-of select="wms:Service/wms:Title"/> [GetCapabilities]</title>
+     <link rel="stylesheet" type="text/css" href="/xslt/kartverket.css"/>
+     <link rel="stylesheet" type="text/css" href="/xslt/galleria.skv.css"/>
    </head>
    <body>
+
+   <div class="page-header">
+    <div class="navbar">
+     <div class="content-wrapper">
+       <h1 class="site-logo">
+         <span>Kartverket</span></h1>
+        
+         <ul class="nav">
+            <li><a href="http://kartverket.no/Om-Kartverket/"><span>
+                Om Kartverket</span></a> </li>
+         </ul>
+     </div>
+    </div>
+   </div>
+
+   <div class="page-main-content startpage">
+   <div class="content-wrapper" id="page-content">
+
      <xsl:for-each select="wms:Service">
        <div>
-         <table>
-           <tr><td><b>Service:</b></td><td><b><xsl:value-of select="wms:Title"/></b></td></tr>
+         <table width="100%">
+           <div class="header lined">
+             <h2 class="h">Service: <xsl:value-of select="wms:Title"/><b style="left: 113px;"></b></h2>
+           </div>
+           <tr><td colspan="2"><b><xsl:value-of select="wms:Abstract"/></b></td></tr>
            <tr><td>Type:</td><td><xsl:value-of select="wms:Name"/>
              <xsl:if test="wms:MaxWidth">
                (max. display size: <xsl:value-of select="wms:MaxWidth"/>x<xsl:value-of select="wms:MaxHeight"/>)
@@ -47,11 +70,10 @@
            </td></tr>
            <tr><td>Base URL:</td><td>
              <xsl:element name="a">
-               <xsl:attribute name="href"><xsl:value-of select="wms:OnlineResource/@*[local-name()='href']"/></xsl:attribute>
-               <xsl:value-of select="wms:OnlineResource/@*[local-name()='href']"/>
+               <xsl:attribute name="href"><xsl:value-of select="substring-before(wms:OnlineResource/@*[local-name()='href'], '?')"/></xsl:attribute>
+               <xsl:value-of select="substring-before(wms:OnlineResource/@*[local-name()='href'], '?')"/>
              </xsl:element>
            </td></tr>
-           <tr><td colspan="2"><xsl:value-of select="wms:Abstract"/></td></tr>
            <tr><td colspan="2"><hr/></td></tr>
            <tr><td>Contact:</td><td><xsl:apply-templates select="wms:ContactInformation"/></td></tr>
            <tr><td>Access:</td><td><xsl:value-of select="wms:AccessConstraints"/></td></tr>
@@ -84,6 +106,8 @@
        <div><h2>Layers</h2></div>
        <xsl:apply-templates select="wms:Layer"/>
      </xsl:for-each>
+   </div> <!--content-wrapper -->
+   </div> <!--page-main-content -->
    </body>
    </html>
 </xsl:template>
@@ -116,7 +140,7 @@
     <xsl:value-of select="//wms:Service/wms:OnlineResource/@*[local-name()='href']"/>
   </xsl:variable>
   <xsl:variable name="client">
-    http://labs.kartverket.no/wms.html?id=<xsl:value-of select="wms:Name"/>&amp;url=<xsl:value-of select="$url"/>&amp;name=<xsl:value-of select="wms:Title"/>&amp;layers=<xsl:value-of select="wms:Name"/>#<xsl:call-template name="selectScale"/>/189721/6833548
+    http://norgeskart.no/3/dynamisk-med-navigasjon.html#<xsl:call-template name="selectScale"/>/168755/6802376/+enkel/l/wms/[<xsl:value-of select="$url"/>]/+<xsl:value-of select="wms:Name"/>
   </xsl:variable>
 
   <xsl:choose>
@@ -176,9 +200,7 @@
          in the following projections:<br/> 
          <xsl:for-each select="wms:CRS">
            <xsl:element name="a">
-             <xsl:attribute name="href">
-               http://spatialreference.org/ref/epsg/<xsl:value-of select="substring(.,6)"/>/
-             </xsl:attribute>
+             <xsl:attribute name="href">http:///epsg.io/<xsl:value-of select="substring(.,6)"/></xsl:attribute>
              <xsl:value-of select="."/>
            </xsl:element>;
          </xsl:for-each>
@@ -190,7 +212,7 @@
        <div><xsl:value-of select="wms:Abstract"/></div>
      </xsl:otherwise>
    </xsl:choose>
-   <table style="padding-left:20px"><tr><td>
+   <table style="margin-left:20px"><tr><td>
      <xsl:apply-templates select="wms:Layer"/>
    </td></tr></table>
 </xsl:template>
@@ -203,7 +225,7 @@
    </xsl:element> 
    | 
    <xsl:value-of select="wms:ContactPosition"/>
-   | 
+   <br /> 
    <xsl:value-of select="wms:ContactAddress"/>
    | 
    <xsl:value-of select="wms:ContactVoiceTelephone"/>
@@ -232,3 +254,4 @@
 </xsl:template>
 
 </xsl:stylesheet>
+
