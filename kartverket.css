@@ -394,8 +394,8 @@ textarea {
  * Remove most spacing between table cells.
  */
 table {
-  border-collapse: collapse;
-  border-spacing: 0; }
+  border-collapse: separate;
+  border-spacing: 5px 0; }
 
 * {
   -webkit-box-sizing: border-box;

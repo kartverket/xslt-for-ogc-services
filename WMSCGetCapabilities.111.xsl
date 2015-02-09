@@ -84,15 +84,21 @@
        </div>
      </xsl:for-each>
      <xsl:for-each select="Capability">
+       <h2>Supported methods</h2>
        <table>
-         <tr><td>Supported methods:</td><td>
-            <ul>
-            <xsl:for-each select="Request/*">
-              <li><b><xsl:value-of select="name(.)"/>:</b> 
-              <b> returns </b> <xsl:for-each select="Format">
-                 <xsl:value-of select="."/>, 
+          <xsl:for-each select="Request/*">
+            <tr><td>
+              <b><xsl:value-of select="name(.)"/></b> 
+            </td><td>
+              <b> returns </b>
+            </td><td>
+              <xsl:for-each select="Format">
+                <xsl:value-of select="."/>, 
               </xsl:for-each>
-              <b> methods </b> <xsl:for-each select="DCPType">
+            </td><td>
+              <b> methods </b> 
+            </td><td>
+              <xsl:for-each select="DCPType">
                 <xsl:for-each select="*">
                   <xsl:value-of select="name(.)"/>&#160; 
                   <xsl:for-each select="*">
@@ -102,10 +108,9 @@
                     </xsl:element>;
                   </xsl:for-each>
                 </xsl:for-each>
-              </xsl:for-each></li>
-            </xsl:for-each>
-            </ul>
+              </xsl:for-each>
          </td></tr>
+            </xsl:for-each>
        </table>
        <div><h2>Layers</h2></div>
        <xsl:apply-templates select="Layer"/>

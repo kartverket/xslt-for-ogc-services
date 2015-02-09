@@ -77,11 +77,12 @@
          </table>
      </div>
      <xsl:for-each select="ows:OperationsMetadata">
+       <h2>Supported methods</h2>
        <table>
-         <tr><td>Supported methods:</td><td>
-            <ul>
-            <xsl:for-each select="ows:Operation">
-              <li><b><xsl:value-of select="@name"/>: </b> 
+         <xsl:for-each select="ows:Operation">
+           <tr><td>  
+             <b><xsl:value-of select="@name"/></b> 
+           </td><td>  
               <xsl:for-each select="ows:DCP">
                 <xsl:for-each select="*">
                   <xsl:value-of select="local-name(.)"/>&#160; 
@@ -92,10 +93,9 @@
                     </xsl:element>; 
                   </xsl:for-each>
                 </xsl:for-each>
-              </xsl:for-each></li>
-            </xsl:for-each>
-            </ul>
-         </td></tr>
+              </xsl:for-each>
+           </td></tr>
+         </xsl:for-each>
        </table>
      </xsl:for-each>
      <div><h2>Layers</h2></div>
